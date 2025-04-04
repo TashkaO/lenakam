@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог изделий | Елена Лютая HandMade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+   <style>
+    /* Вставьте в секцию <style> products.html */
+    :root {
+        --primary: #CC6666;
+        --secondary: #F5F5F5;
+        --accent: #E5E5E5;
+        --dark: #2D2D2D;
+        --text-light: #555555;
+        --background-accent: #F9F9F9;
+        --border-color: #EDEDED;
+        --hover-background: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Мобильное меню */
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 20px;
+    }
+
+    .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: var(--dark);
+        margin: 4px 0;
+    }
+
+    /* Шапка */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255,255,255,0.9);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        transition: all 0.3s;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .logo img {
+        height: 80px;
+        transition: 0.3s;
+    }
+
+    .logo-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5em;
+        color: var(--dark);
+    }
+
+    .logo-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+    }
+
+    .nav-links a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 600;
+        position: relative;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        bottom: -3px;
+        left: 50%;
+        transition: all 0.3s;
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+        left: 0;
+    }
+
+    /* Адаптивность шапки */
+    @media (max-width: 768px) {
+        .nav-links {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: white;
+            flex-direction: column;
+            display: none;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links a {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .menu-toggle {
+            display: flex;
+        }
+
+        .nav-container { 
+            padding: 15px; 
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo img { 
+            height: 60px; 
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Шапка -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <img src="Photo/logo.png" alt="Логотип" style="height: 80px;">
+                    <div class="logo-text">Елена Лютая HandMade</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">О мастере</a></li>
+                <li><a href="index.html#promotions">Акции</a></li>
+                <li><a href="index.html#products">Каталог</a></li>
+                <li><a href="index.html#news">Новости</a></li>
+                <li><a href="index.html#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <section class="product-page">
+        <div class="filter-container">
+            <div class="filter-group">
+                <h3>Категории</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="category" data-value="all">Все</button>
+                    <button class="filter-btn" data-filter="category" data-value="embroidery">Вышивка</button>
+                    <button class="filter-btn" data-filter="category" data-value="knitting">Вязание</button>
+                    <button class="filter-btn" data-filter="category" data-value="sewing">Шитье</button>
+                    <button class="filter-btn" data-filter="category" data-value="foamiran">Фоамиран</button>
+                    <button class="filter-btn" data-filter="category" data-value="other">Прочее</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Наличие</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="availability" data-value="all">Все</button>
+                    <button class="filter-btn" data-filter="availability" data-value="in_stock">В наличии</button>
+                    <button class="filter-btn" data-filter="availability" data-value="on_order">На заказ</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsContainer"></div>
+        <div class="pagination" id="pagination">
+            <button class="page-btn prev" data-action="prev">← Назад</button>
+            <div class="page-numbers"></div>
+            <button class="page-btn next" data-action="next">Вперед →</button>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <p>© 2025 Елена Лютая HandMade</p>
+    </footer>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+        // Добавьте проверку загрузки данных
+        fetch('products.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Ошибка загрузки товаров');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Загруженные данные:', data); // Проверьте в консоли
+                products = data.products;
+                applyFiltersAndRender();
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                // Выведем сообщение об ошибке на страницу
+                productsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        Ошибка загрузки товаров. Проверьте консоль.
+                    </div>
+                `;
+            });
+    });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const productsContainer = document.getElementById('productsContainer');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const pagination = document.getElementById('pagination');
+
+            const ITEMS_PER_PAGE = 6;
+            let currentPage = 1;
+            let filters = {
+                category: 'all',
+                availability: 'all'
+            };
+            let products = [];
+
+            // Загрузка данных
+            fetch('products.json')
+                .then(response => response.json())
+                .then(data => {
+                    products = data.products;
+                    applyFiltersAndRender();
+                })
+                .catch(error => console.error('Ошибка загрузки:', error));
+
+            function applyFilters() {
+                return products.filter(product => {
+                    const categoryMatch = filters.category === 'all' || product.category === filters.category;
+                    const availabilityMatch = filters.availability === 'all' || product.availability === filters.availability;
+                    return categoryMatch && availabilityMatch;
+                });
+            }
+
+            function applyFiltersAndRender() {
+                const filtered = applyFilters();
+                renderProducts(filtered);
+                renderPagination(filtered.length);
+            }
+
+            function renderProducts(filtered) {
+                const start = (currentPage - 1) * ITEMS_PER_PAGE;
+                const end = start + ITEMS_PER_PAGE;
+                const paginated = filtered.slice(start, end);
+
+                productsContainer.innerHTML = paginated.map(product => `
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <img src="images/products/${product.images[0]}" 
+                                 class="product-main-image" 
+                                 data-index="0">
+                            <div class="product-thumbnails">
+                                ${product.images.map((img, index) => `
+                                    <img src="images/products/${img}" 
+                                         class="thumb ${index === 0 ? 'active' : ''}" 
+                                         data-index="${index}">
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">${product.title}</div>
+                            <div class="product-description">${product.description}</div>
+                            <div class="product-price">${product.price} ₽</div>
+                            <div class="availability-status status-${product.availability}">
+                                ${product.availability === 'in_stock' ? 'В наличии' : 'На заказ'}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Инициализация переключения изображений
+                document.querySelectorAll('.thumb').forEach(thumb => {
+                    thumb.addEventListener('click', (e) => {
+                        const card = e.target.closest('.product-card');
+                        const mainImage = card.querySelector('.product-main-image');
+                        const index = e.target.dataset.index;
+
+                        card.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+                        e.target.classList.add('active');
+                        mainImage.src = `images/products/${product.images[index]}`;
+                    });
+                });
+            }
+
+            // Обработчик фильтров
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterType = button.dataset.filter;
+                    const value = button.dataset.value;
+
+                    // Сброс активных кнопок в группе
+                    document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    button.classList.add('active');
+
+                    filters[filterType] = value;
+                    currentPage = 1;
+                    applyFiltersAndRender();
+                });
+            });
+
+            // Пагинация
+            function renderPagination(totalItems) {
+                const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+                pagination.style.display = totalPages > 1 ? 'flex' : 'none';
+
+                document.querySelector('.page-numbers').innerHTML = Array.from({length: totalPages}, (_, i) => 
+                    `<div class="page-number ${i+1 === currentPage ? 'active' : ''}" 
+                          data-page="${i+1}">${i+1}</div>`
+                ).join('');
+
+                // Обработчики кликов по номерам страниц
+                document.querySelectorAll('.page-number').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        currentPage = parseInt(btn.dataset.page);
+                        applyFiltersAndRender();
+                    });
+                });
+            }
+
+            // Обработчики кнопок "Назад" и "Вперед"
+            pagination.addEventListener('click', (e) => {
+                if (e.target.classList.contains('page-number')) {
+                    const page = parseInt(e.target.dataset.page);
+                    currentPage = page;
+                    applyFiltersAndRender();
+                }
+
+                if (e.target.classList.contains('prev') && currentPage > 1) {
+                    currentPage--;
+                    applyFiltersAndRender();
+                }
+
+                if (e.target.classList.contains('next') && 
+                    currentPage < Math.ceil(applyFilters().length / ITEMS_PER_PAGE)) {
+                    currentPage++;
+                    applyFiltersAndRender();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Елена Лютая HandMade | Уникальные изделия ручной работы</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #CC6666;
+            --secondary: #F5F5F5;
+            --accent: #E5E5E5;
+            --dark: #2D2D2D;
+            --text-light: #555555;
+            --background-accent: #F9F9F9;
+            --border-color: #EDEDED;
+            --hover-background: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: var(--dark);
+            background: var(--background-accent);
+        }
+
+        /* Мобильное меню */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            margin: 4px 0;
+        }
+
+        /* Адаптивная навигация */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                display: none;
+                padding: 20px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links a {
+                padding: 15px 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Якорные секции */
+        #about, #promotions, #products, #news, #contacts {
+            scroll-margin-top: 100px;
+        }
+
+        /* Шапка */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 80px;
+            transition: 0.3s;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            color: var(--dark);
+        }
+
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -3px;
+            left: 50%;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Герой-секция */
+        .hero {
+            height: 70vh;
+            min-height: 400px;
+            padding: 40px 0;
+            background: url('Photo/hero.jpg') center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            margin: 0;
+            color: var(--dark);
+        }
+
+        .hero-content p {
+            font-size: 1.5em;
+            margin: 15px 0 30px;
+            color: var(--text-light);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            color: var(--dark);
+        }
+
+        .button {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .button:hover {
+            background: #b55d5d;
+            transform: translateY(-2px);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        /* Приветствие */
+        .welcome-section {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .welcome-image {
+    position: relative;
+    height: auto; /* Убираем фиксированную высоту */
+    aspect-ratio: 3/4; /* Добавляем соотношение сторон (например, 3:4) */
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.welcome-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Сохраняем пропорции с обрезкой */
+    transition: transform 0.3s;
+}
+
+        .welcome-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .view-profile-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 45, 45, 0.8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 0.3s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .welcome-image:hover .view-profile-overlay {
+            opacity: 1;
+        }
+
+        /* Слайдер акций */
+        .promo-slider {
+            position: relative;
+            height: 500px;
+        }
+
+        .promo-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .promo-slide.active {
+            opacity: 1;
+        }
+
+        .promo-content {
+            background: rgba(255,255,255,0.9);
+            padding: 60px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .promo-content h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .promo-content p {
+            font-size: 1.2em;
+        }
+
+        /* Навигация слайдера акций */
+        .promo-navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .promo-dot {
+            width: 15px;
+            height: 15px;
+            background: var(--text-light);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .promo-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+
+        /* Блог видов товаров */
+        .product-blog {
+            padding: 100px 40px;
+            background: var(--secondary);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-item {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-content {
+            padding: 30px;
+        }
+
+        .product-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            margin: 0 0 15px;
+            color: var(--dark);
+        }
+
+        .product-content p {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        .product-link {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+        }
+
+        /* Новости */
+        .news-section {
+            padding: 60px 40px;
+            background: var(--secondary);
+        }
+
+        .news-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .news-slider {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-slide {
+            display: none;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .news-slide.active {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .news-image {
+            flex: 0 0 40%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .news-navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .news-dot {
+            width: 15px;
+            height: 15px;
+            background: var(--text-light);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .news-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+
+        .news-section .button {
+            display: block;
+            width: 300px;
+            height: 24px;
+            margin: 30px auto 0;
+            padding: 12px 30px;
+            text-align: center;
+        }
+
+        /* Контакты */
+        .contacts-section {
+            padding: 60px 40px;
+            text-align: center;
+            background: var(--secondary);
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary);
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .contact-item a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            bottom: -3px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        .contact-item a:hover::after {
+            width: 100%;
+        }
+
+        /* Футер */
+        footer {
+            background: url('Photo/footer-bg.jpg') center/cover;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        footer p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Стрелка наверх */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary);
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Адаптивные улучшения */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { 
+                padding: 15px; 
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo img { 
+                height: 60px; 
+            }
+            
+            .hero {
+                height: auto;
+                min-height: 300px;
+                padding: 40px 20px;
+            }
+            
+            .hero-content h1 { 
+                font-size: 2.5em; 
+            }
+            
+            .product-img {
+                height: 200px;
+                aspect-ratio: 1/1;
+            }
+            
+            .welcome-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .welcome-image {
+               aspect-ratio: 16/9; 
+            }
+            
+            .product-blog { 
+                padding: 40px 20px; 
+            }
+            
+            .news-section { 
+                padding: 30px 20px; 
+            }
+            
+            .contacts-section { 
+                padding: 30px 20px; 
+            }
+            
+            footer { 
+                padding: 30px; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 { 
+                font-size: 2em; 
+            }
+            
+            .button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Мобильное меню -->
+    <div class="menu-toggle" id="mobileMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Шапка -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo-link">
+                <div class="logo">
+                    <img src="Photo/logo.png" alt="Логотип">
+                    <div class="logo-text">Елена Лютая HandMade</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">О мастере</a></li>
+                <li><a href="#promotions">Акции</a></li>
+                <li><a href="#products">Каталог</a></li>
+                <li><a href="#news">Новости</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Стрелка наверх -->
+    <a href="#" class="back-to-top" title="Наверх">&#8593;</a>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Рукоделие с душой</h1>
+            <p>Уникальные изделия ручной работы от Елены Лютой</p>
+            <a href="#products" class="button">Посмотреть работы</a>
+        </div>
+        <div class="scroll-down">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 16L6 10H18L12 16Z"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Приветствие мастера -->
+    <section id="about" class="welcome-section">
+        <a href="about.html" class="welcome-image">
+            <img src="Photo/master-vertical.jpg" alt="Елена Лютая">
+            <div class="view-profile-overlay">Подробнее о мастере</div>
+        </a>
+        <div class="welcome-text">
+            <h2>Добро пожаловать в мастерскую Елены Лютой!</h2>
+            <p>Здесь, в самом сердце Камышина, рождаются вещи, в которые вплетены душа и теплота ручной работы. Меня зовут Елена, и я руковожу клубом «Рукодельница» и «Центром ремесел» при музее — для меня это не просто хобби, а целая жизнь, наполненная нитями, тканями и историями.</p>
+            <p>Каждая вышивка, вязаный узор или лепесток из фоамирана — это маленькая история, которая ждет своего героя. От авторских пряников до уютных пледов — все создается с любовью к деталям. Готовы окружить себя вещами, которые не повторяются?</p>
+            <p>👉 Загляните в каталог — возможно, ваша будущая любимая работа уже ждет вас. А если мечтаете о чем-то особенном, напишите мне. Вместе мы создадим историю, которая станет вашей.</p>
+        </div>
+    </section>
+
+    <!-- Слайдер акций -->
+    <section id="promotions" class="promo-slider">
+        <div class="promo-slide active" style="background-image: url('Photo/promo1.jpg')">
+            <div class="promo-content">
+                <h3>Специальное предложение!</h3>
+                <p>Скидка 15% на все вязаные изделия до конца месяца</p>
+            </div>
+        </div>
+        <div class="promo-slide" style="background-image: url('Photo/promo2.jpg')">
+            <div class="promo-content">
+                <h3>Новая коллекция</h3>
+                <p>Свежие работы в технике вышивки крестом уже в каталоге</p>
+            </div>
+        </div>
+        <div class="promo-navigation">
+            <div class="promo-dot active" data-slide="0"></div>
+            <div class="promo-dot" data-slide="1"></div>
+        </div>
+    </section>
+
+    <!-- Блог видов товаров -->
+    <section id="products" class="product-blog">
+        <div class="product-grid">
+            <a href="products.html?category=embroidery" class="product-item product-link">
+                <div class="product-img" style="background-image: url('Photo/embroidery.jpg')"></div>
+                <div class="product-content">
+                    <h3>Вышивка</h3>
+                    <p>Изысканные работы в классических и современных техниках</p>
+                </div>
+            </a>
+            <a href="products.html?category=knitting" class="product-item product-link">
+                <div class="product-img" style="background-image: url('Photo/knitting.jpg')"></div>
+                <div class="product-content">
+                    <h3>Вязание</h3>
+                    <p>Уютные вещи ручной вязки из натуральных материалов</p>
+                </div>
+            </a>
+            <a href="products.html?category=sewing" class="product-item product-link">
+                <div class="product-img" style="background-image: url('Photo/sewing.jpg')"></div>
+                <div class="product-content">
+                    <h3>Шитье</h3>
+                    <p>Уникальные предметы интерьера и аксессуары</p>
+                </div>
+            </a>
+            <a href="products.html?category=foamiran" class="product-item product-link">
+                <div class="product-img" style="background-image: url('Photo/foamiran.jpg')"></div>
+                <div class="product-content">
+                    <h3>Фоамиран</h3>
+                    <p>Декоративные элементы и аксессуары</p>
+                </div>
+            </a>
+            <a href="products.html?category=other" class="product-item product-link">
+                <div class="product-img" style="background-image: url('Photo/other.jpg')"></div>
+                <div class="product-content">
+                    <h3>Прочее</h3>
+                    <p>Необычные handmade-изделия</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Новости -->
+    <section id="news" class="news-section">
+        <div class="news-header">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary);">Последние события</h2>
+            <p>Здесь вы можете узнать о самых свежих новостях мастерской</p>
+        </div>
+        <div class="news-slider">
+            <div class="news-slide active">
+                <div class="news-image" style="background-image: url('Photo/news1.jpg')"></div>
+                <div class="news-content">
+                    <h3>Мастер-класс по вышивке</h3>
+                    <p>Приглашаем на бесплатный мастер-класс по вышивке крестом. Узнайте секреты профессиональной техники!</p>
+                </div>
+            </div>
+            <div class="news-slide">
+                <div class="news-image" style="background-image: url('Photo/news2.jpg')"></div>
+                <div class="news-content">
+                    <h3>Новая линейка пряников</h3>
+                    <p>Попробуйте наши новые авторские пряники ручной работы для любого праздника!</p>
+                </div>
+            </div>
+            <div class="news-navigation">
+                <div class="news-dot active" data-slide="0"></div>
+                <div class="news-dot" data-slide="1"></div>
+            </div>
+        </div>
+        <a href="all-news.html" class="button">Все новости</a>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contacts" class="contacts-section">
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--primary);">Свяжитесь со мной</h2>
+        <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+        </div>
+        <div class="contact-item">
+            <svg viewBox="0 0 24 24" style="width: 28px; height: 28px;"><path fill="var(--primary)" d="M19.37 9.1l-8.89 5.19-8.89-5.19L2 14l8.89 5.2 8.89-5.2zm.75 2.11l-8.89 5.19L2.63 11.21l8.89-5.2 8.89 5.2z"/></svg>
+            <a href="https://vk.com/elenalutaya_handmade">VKontakte</a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <p>© 2025 Елена Лютая HandMade</p>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.getElementById('mobileMenu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Липкая шапка
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.pageYOffset > 0);
+            
+            // Показ стрелки наверх
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Слайдер акций
+        let currentPromo = 0;
+        const promoSlides = document.querySelectorAll('.promo-slide');
+        const promoDots = document.querySelectorAll('.promo-dot');
+
+        function showPromoSlide(index) {
+            promoSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            promoDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        promoDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentPromo = parseInt(dot.dataset.slide);
+                showPromoSlide(currentPromo);
+            });
+        });
+
+        setInterval(() => {
+            currentPromo = (currentPromo + 1) % promoSlides.length;
+            showPromoSlide(currentPromo);
+        }, 5000);
+
+        // Слайдер новостей
+        let currentNews = 0;
+        const newsSlides = document.querySelectorAll('.news-slide');
+        const newsDots = document.querySelectorAll('.news-dot');
+
+        function showNewsSlide(index) {
+            newsSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            newsDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        newsDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentNews = parseInt(dot.dataset.slide);
+                showNewsSlide(currentNews);
+            });
+        });
+
+        setInterval(() => {
+            currentNews = (currentNews + 1) % newsSlides.length;
+            showNewsSlide(currentNews);
+        }, 5000);
+
+        // Обработчик клика на логотип
+        document.querySelector('.logo-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Обработчик клика для стрелки наверх
+        document.querySelector('.back-to-top').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

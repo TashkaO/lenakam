@@ -118,6 +118,10 @@
             font-size: 1.5em;
             color: var(--dark);
         }
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
         .nav-links {
             list-style: none;
             display: flex;
@@ -145,7 +149,7 @@
         }
         /* Герой-секция */
         .hero {
-            height: 70vh;
+            height: 7vh;
             min-height: 400px;
             padding: 40px 0;
             background: url('Photo/hero.jpg') center/cover;
@@ -157,12 +161,12 @@
         }
         .hero-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4em;
+            font-size: 3em;
             margin: 0;
             color: var(--dark);
         }
         .hero-content p {
-            font-size: 1.5em;
+            font-size: 1.2em;
             margin: 15px 0 30px;
             color: var(--text-light);
         }
@@ -197,8 +201,9 @@
         }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, 300px);
             gap: 30px;
+            justify-content: center;
         }
         .gallery-item {
             position: relative;
@@ -207,13 +212,15 @@
             overflow: hidden;
             transition: transform 0.3s;
             cursor: pointer;
+            width: 300px;
         }
         .gallery-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
         .gallery-images {
-            height: 300px;
+		background: var(--accent);
+            height: 400px;
             position: relative;
         }
         .gallery-image {
@@ -222,7 +229,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transition: opacity 0.5s;
         }
         .gallery-info {
@@ -240,8 +247,8 @@
         }
         .availability {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 3px;
+            right: 3px;
             color: white;
             padding: 5px 10px;
             border-radius: 15px;
@@ -251,8 +258,9 @@
         .on-order { background: var(--warning); }
         .price {
             position: absolute;
-            bottom: 15px;
+            bottom: 0px;
             right: 15px;
+
             font-size: 1.2em;
             color: var(--dark);
             font-weight: 600;
@@ -297,11 +305,14 @@
             margin: 40px auto;
             max-width: 900px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: -30px;
+            right: -30px;
             cursor: pointer;
             font-size: 36px;
             color: #cbcbcb;
@@ -312,8 +323,9 @@
             color: #cccccc;
         }
         .modal-images {
+           width: 100%;
+            height: 100%;
             position: relative;
-            height: 500px;
         }
         .modal-slider-container {
             width: 100%;
@@ -326,12 +338,14 @@
         }
         .modal-slider-slide {
             min-width: 100%;
-            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .modal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         .modal-slider-dots {
             position: absolute;
@@ -357,6 +371,7 @@
         .modal-info {
             padding: 20px;
             text-align: center;
+            width: 100%;
         }
         .modal-info .category-badge {
             margin-bottom: 10px;
@@ -414,7 +429,7 @@
         /* Адаптивные улучшения */
         @media (max-width: 1024px) {
             .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fit, 250px);
             }
         }
         @media (max-width: 768px) {
@@ -433,9 +448,6 @@
             }
             .hero-content h1 { 
                 font-size: 2.5em; 
-            }
-            .gallery-images {
-                height: 200px;
             }
             .gallery-section { 
                 padding: 40px 20px; 
@@ -500,6 +512,7 @@
     <section id="gallery" class="gallery-section">
         <div class="filter-buttons" id="categoryFilter">
             <button class="filter-btn active" data-category="all">Все категории</button>
+	    <button class="filter-btn" data-category="vyshivka">Вышивка</button>
             <button class="filter-btn" data-category="vyazanie">Вязание</button>
             <button class="filter-btn" data-category="shitie">Шитье</button>
             <button class="filter-btn" data-category="foamiran">Фоамиран</button>
@@ -525,8 +538,10 @@
                 <p id="modalDescription"></p>
                 <p class="price" id="modalPrice"></p>
             </div>
+
         </div>
     </div>
+
     <!-- Футер -->
     <footer>
         <p>© 2025 Елена Лютая HandMade</p>
@@ -536,62 +551,57 @@
         const products = [
             {
                 id: 1,
-                category: 'vyazanie',
+                category: 'vyshivka',
                 images: ['work1.jpg', 'work1-2.jpg', 'work1-3.jpg'],
-                title: 'Вязаный свитер',
-                description: 'Теплый свитер ручной вязки из натуральной шерсти',
+                title: 'Вышитый мяч "Лето"',
+                description: 'Уютный акцент для дома, созданный вручную с любовью к деталям: вышитые цветы, геометрические узоры и натуральные материалы дарят тепло и напоминают о солнечных днях. Идеальный подарок, чтобы добавить в интерьер нотку летней радости и душевного тепла',
                 availability: 'В наличии',
-                price: 4500
+                price: 2500
             },
             {
                 id: 2,
-                category: 'shitie',
+                category: 'vyshivka',
                 images: ['work2.jpg', 'work2-2.jpg'],
-                title: 'Платье ручной работы',
-                description: 'Элегантное платье с ручной вышивкой',
-                availability: 'На заказ',
-                price: 8500
-            },
-            {
-                id: 3,
-                category: 'foamiran',
-                images: ['work3.jpg', 'work3-2.jpg'],
-                title: 'Цветы из фоамирана',
-                description: 'Набор декоративных цветов',
+                title: 'Матрёшка «Гжельская сказка»',
+                description: 'Яркий шедевр русской традиции: голубые цветы, золотистые завитки и нежные оттенки словно сошли с летнего поля, чтобы украсить ваш дом своей живостью и гармонией',
                 availability: 'В наличии',
                 price: 1500
             },
             {
-                id: 4,
+                id: 3,
                 category: 'other',
+                images: ['work3.jpg', 'work3-2.jpg', 'work3-3.jpg', 'work3-4.jpg'],
+                title: 'Пряник «Чайный домик»',
+                description: 'Пряник с медовым вкусом, украшенный разноцветной глазурью— идеальное дополнение к вашей любимой кружке. Украсьте свой чайный ритуал сладким ароматом корицы и теплом домашнего уюта!',
+                availability: 'На заказ',
+                price: 300
+            },
+            {
+                id: 4,
+                category: 'foamiran',
                 images: ['work4.jpg'],
-                title: 'Деревянная шкатулка',
-                description: 'Ручная роспись по дереву',
+                title: 'Арка «Летний сад»',
+                description: 'Романтичная арка, созданная вручную из дерева, украшенная цветами и зелёными листьями из фоамирана и воздушными шифоновыми драпировками — идеальное место для самых трогательных моментов вашего дня. Легко складывается, чтобы хранить волшебство до новых встреч! ',
                 availability: 'В наличии',
-                price: 3200
+                price: 8000
             }
         ];
-
         const itemsPerPage = 8;
         let currentPage = 1;
         let filteredProducts = [...products];
         let activeCategory = 'all';
-
         function renderGallery(page) {
             const container = document.getElementById('galleryContainer');
             container.innerHTML = '';
             const start = (page - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const paginatedItems = filteredProducts.slice(start, end);
-
             paginatedItems.forEach(product => {
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
                 item.dataset.category = product.category;
-
                 const imagesContainer = document.createElement('div');
                 imagesContainer.className = 'gallery-images';
-                
                 product.images.forEach((src, index) => {
                     const img = document.createElement('img');
                     img.src = `Photo/${src}`;
@@ -600,45 +610,36 @@
                     img.style.opacity = index === 0 ? 1 : 0;
                     imagesContainer.appendChild(img);
                 });
-
                 const info = document.createElement('div');
                 info.className = 'gallery-info';
-                
                 const categoryBadge = document.createElement('div');
                 categoryBadge.className = 'category-badge';
                 categoryBadge.textContent = getCategoryLabel(product.category);
-                
                 const availability = document.createElement('span');
                 availability.className = `availability ${product.availability === 'В наличии' ? 'in-stock' : 'on-order'}`;
                 availability.textContent = product.availability;
-                
                 const title = document.createElement('h3');
                 title.textContent = product.title;
-                
                 const description = document.createElement('div');
                 description.className = 'gallery-description';
                 description.textContent = product.description;
-                
                 const price = document.createElement('div');
                 price.className = 'price';
                 price.textContent = `${product.price} ₽`;
-
                 info.appendChild(categoryBadge);
                 info.appendChild(availability);
                 info.appendChild(title);
                 info.appendChild(description);
                 info.appendChild(price);
-
                 item.appendChild(imagesContainer);
                 item.appendChild(info);
                 item.addEventListener('click', () => openModal(product));
                 container.appendChild(item);
             });
         }
-
         function getCategoryLabel(category) {
             const categories = {
-		'vyshivka': 'Вышивка',
+                'vyshivka': 'Вышивка',
                 'vyazanie': 'Вязание',
                 'shitie': 'Шитье',
                 'foamiran': 'Фоамиран',
@@ -646,7 +647,6 @@
             };
             return categories[category] || 'Другое';
         }
-
         function renderPagination() {
             const pagination = document.getElementById('pagination');
             pagination.innerHTML = '';
@@ -663,12 +663,10 @@
                 pagination.appendChild(btn);
             }
         }
-
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                
                 activeCategory = btn.dataset.category;
                 currentPage = 1;
                 filteredProducts = activeCategory === 'all' 
@@ -678,14 +676,11 @@
                 renderPagination();
             });
         });
-
         let currentModalImage = 0;
         let sliderInterval;
         const modal = document.getElementById('productModal');
-
         function openModal(product) {
             currentModalImage = 0;
-            
             document.getElementById('modalTitle').textContent = product.title;
             document.getElementById('modalCategory').textContent = getCategoryLabel(product.category);
             const availability = document.getElementById('modalAvailability');
@@ -693,7 +688,6 @@
             availability.className = `availability ${product.availability === 'В наличии' ? 'in-stock' : 'on-order'}`;
             document.getElementById('modalDescription').textContent = product.description;
             document.getElementById('modalPrice').textContent = `${product.price} ₽`;
-
             const modalImages = document.getElementById('modalImages');
             modalImages.innerHTML = '';
             product.images.forEach(src => {
@@ -706,7 +700,6 @@
                 slide.appendChild(img);
                 modalImages.appendChild(slide);
             });
-
             const dotsContainer = document.getElementById('modalSliderDots');
             dotsContainer.innerHTML = '';
             product.images.forEach((_, index) => {
@@ -715,14 +708,11 @@
                 dot.addEventListener('click', () => goToSlide(index));
                 dotsContainer.appendChild(dot);
             });
-
             updateSlider();
             startSliderAuto();
-            
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
-
         function startSliderAuto() {
             clearInterval(sliderInterval);
             sliderInterval = setInterval(() => {
@@ -730,64 +720,51 @@
                 updateSlider();
             }, 3000);
         }
-
         function goToSlide(index) {
             currentModalImage = index;
             updateSlider();
             startSliderAuto();
         }
-
         function updateSlider() {
             const track = document.querySelector('.modal-slider-track');
             const offset = -currentModalImage * 100;
             track.style.transform = `translateX(${offset}%)`;
-            
             document.querySelectorAll('.modal-slider-dot').forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentModalImage);
             });
         }
-
         modal.addEventListener('mouseenter', () => clearInterval(sliderInterval));
         modal.addEventListener('mouseleave', startSliderAuto);
-
         document.querySelector('.modal-close').addEventListener('click', () => {
             clearInterval(sliderInterval);
             closeModal();
         });
-
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal();
         });
-
         function closeModal() {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             filteredProducts = [...products];
             renderGallery(currentPage);
             renderPagination();
         });
-
         document.getElementById('mobileMenu').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
-
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.querySelector('.nav-links').classList.remove('active');
             });
         });
-
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             navbar.classList.toggle('scrolled', window.pageYOffset > 0);
-            
             const backToTop = document.querySelector('.back-to-top');
             backToTop.classList.toggle('show', window.pageYOffset > 300);
         });
-
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -795,7 +772,6 @@
                 document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
             });
         });
-
         document.querySelector('.back-to-top').addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });

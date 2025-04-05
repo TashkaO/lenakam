@@ -16,7 +16,6 @@
             --border-color: #EDEDED;
             --hover-background: rgba(255, 255, 255, 0.9);
         }
-
         body {
             font-family: 'Source Sans Pro', sans-serif;
             margin: 0;
@@ -25,7 +24,6 @@
             color: var(--dark);
             background: var(--background-accent);
         }
-
         /* Мобильное меню */
         .menu-toggle {
             display: none;
@@ -33,14 +31,12 @@
             cursor: pointer;
             padding: 20px;
         }
-
         .menu-toggle span {
             width: 25px;
             height: 3px;
             background: var(--dark);
             margin: 4px 0;
         }
-
         /* Адаптивная навигация */
         @media (max-width: 768px) {
             .nav-links {
@@ -54,26 +50,21 @@
                 padding: 20px;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             }
-            
             .nav-links.active {
                 display: flex;
             }
-            
             .nav-links a {
                 padding: 15px 0;
                 border-bottom: 1px solid var(--border-color);
             }
-            
             .menu-toggle {
                 display: flex;
             }
         }
-
         /* Якорные секции */
         #about, #promotions, #products, #news, #contacts {
             scroll-margin-top: 100px;
         }
-
         /* Шапка */
         .navbar {
             position: fixed;
@@ -84,49 +75,41 @@
             z-index: 1000;
             transition: all 0.3s;
         }
-
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
         }
-
         .logo {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-
         .logo img {
             height: 80px;
             transition: 0.3s;
         }
-
         .logo-text {
             font-family: 'Playfair Display', serif;
             font-size: 1.5em;
             color: var(--dark);
         }
-
         .logo-link {
             text-decoration: none;
             color: inherit;
         }
-
         .nav-links {
             list-style: none;
             display: flex;
             gap: 30px;
         }
-
         .nav-links a {
             color: var(--dark);
             text-decoration: none;
             font-weight: 600;
             position: relative;
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -137,12 +120,10 @@
             left: 50%;
             transition: all 0.3s;
         }
-
         .nav-links a:hover::after {
             width: 100%;
             left: 0;
         }
-
         /* Герой-секция */
         .hero {
             height: 70vh;
@@ -155,27 +136,23 @@
             justify-content: center;
             text-align: center;
         }
-
         .hero-content h1 {
             font-family: 'Playfair Display', serif;
             font-size: 4em;
             margin: 0;
             color: var(--dark);
         }
-
         .hero-content p {
             font-size: 1.5em;
             margin: 15px 0 30px;
             color: var(--text-light);
         }
-
         .scroll-down {
             position: absolute;
             bottom: 40px;
             animation: bounce 2s infinite;
             color: var(--dark);
         }
-
         .button {
             background: var(--primary);
             color: white;
@@ -185,18 +162,15 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-
         .button:hover {
             background: #b55d5d;
             transform: translateY(-2px);
         }
-
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
             40% {transform: translateY(-20px);}
             60% {transform: translateY(-10px);}
         }
-
         /* Приветствие */
         .welcome-section {
             padding: 60px 40px;
@@ -207,29 +181,25 @@
             gap: 40px;
             align-items: center;
         }
-
         .welcome-image {
-    position: relative;
-    height: auto; /* Убираем фиксированную высоту */
-    aspect-ratio: 3/4; /* Добавляем соотношение сторон (например, 3:4) */
-    border-radius: 15px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.welcome-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Сохраняем пропорции с обрезкой */
-    transition: transform 0.3s;
-}
-
+            position: relative;
+            height: auto;
+            aspect-ratio: 3/4;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .welcome-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
         .welcome-image:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
-
         .view-profile-overlay {
             position: absolute;
             top: 0;
@@ -247,17 +217,14 @@
             transition: opacity 0.3s;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-
         .welcome-image:hover .view-profile-overlay {
             opacity: 1;
         }
-
         /* Слайдер акций */
         .promo-slider {
             position: relative;
             height: 500px;
         }
-
         .promo-slide {
             position: absolute;
             width: 100%;
@@ -270,11 +237,9 @@
             align-items: center;
             justify-content: center;
         }
-
         .promo-slide.active {
             opacity: 1;
         }
-
         .promo-content {
             background: rgba(255,255,255,0.9);
             padding: 60px;
@@ -282,16 +247,13 @@
             text-align: center;
             max-width: 800px;
         }
-
         .promo-content h3 {
             font-size: 2em;
             margin-bottom: 20px;
         }
-
         .promo-content p {
             font-size: 1.2em;
         }
-
         /* Навигация слайдера акций */
         .promo-navigation {
             position: absolute;
@@ -301,7 +263,6 @@
             display: flex;
             gap: 15px;
         }
-
         .promo-dot {
             width: 15px;
             height: 15px;
@@ -310,24 +271,20 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-
         .promo-dot.active {
             background: var(--primary);
             transform: scale(1.3);
         }
-
         /* Блог видов товаров */
         .product-blog {
             padding: 100px 40px;
             background: var(--secondary);
         }
-
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
-
         .product-item {
             background: transparent;
             border: 1px solid var(--border-color);
@@ -335,58 +292,67 @@
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-
         .product-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
         .product-img {
             height: 300px;
             background-size: cover;
             background-position: center;
         }
-
         .product-content {
             padding: 30px;
         }
-
         .product-content h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5em;
             margin: 0 0 15px;
             color: var(--dark);
         }
-
         .product-content p {
             margin: 0;
             color: var(--text-light);
         }
-
         .product-link {
             color: inherit;
             text-decoration: none;
             display: block;
             height: 100%;
         }
-
+        /* Стили для новой кнопки */
+        .view-all-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .view-all-button {
+            background: var(--primary);
+            color: white;
+            padding: 12px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .view-all-button:hover {
+            background: #b55d5d;
+            transform: translateY(-2px);
+        }
         /* Новости */
         .news-section {
             padding: 60px 40px;
             background: var(--secondary);
         }
-
         .news-header {
             text-align: center;
             margin-bottom: 40px;
         }
-
         .news-slider {
             position: relative;
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .news-slide {
             display: none;
             padding: 40px;
@@ -394,13 +360,11 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
         .news-slide.active {
             display: flex;
             align-items: center;
             gap: 30px;
         }
-
         .news-image {
             flex: 0 0 40%;
             height: 300px;
@@ -408,11 +372,9 @@
             background-position: center;
             border-radius: 15px;
         }
-
         .news-content {
             flex: 1;
         }
-
         .news-navigation {
             position: absolute;
             bottom: 20px;
@@ -421,7 +383,6 @@
             display: flex;
             gap: 15px;
         }
-
         .news-dot {
             width: 15px;
             height: 15px;
@@ -430,12 +391,10 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-
         .news-dot.active {
             background: var(--primary);
             transform: scale(1.3);
         }
-
         .news-section .button {
             display: block;
             width: 300px;
@@ -444,14 +403,12 @@
             padding: 12px 30px;
             text-align: center;
         }
-
         /* Контакты */
         .contacts-section {
             padding: 60px 40px;
             text-align: center;
             background: var(--secondary);
         }
-
         .contact-item {
             display: inline-flex;
             align-items: center;
@@ -459,19 +416,16 @@
             margin: 20px 0;
             font-size: 1.2em;
         }
-
         .contact-item svg {
             width: 24px;
             height: 24px;
             fill: var(--primary);
         }
-
         .contact-item a {
             color: var(--primary);
             text-decoration: none;
             position: relative;
         }
-
         .contact-item a::after {
             content: '';
             position: absolute;
@@ -482,11 +436,9 @@
             left: 0;
             transition: width 0.3s;
         }
-
         .contact-item a:hover::after {
             width: 100%;
         }
-
         /* Футер */
         footer {
             background: url('Photo/footer-bg.jpg') center/cover;
@@ -495,7 +447,6 @@
             text-align: center;
             position: relative;
         }
-
         footer::before {
             content: '';
             position: absolute;
@@ -505,12 +456,10 @@
             bottom: 0;
             background: rgba(0,0,0,0.3);
         }
-
         footer p {
             position: relative;
             z-index: 1;
         }
-
         /* Стрелка наверх */
         .back-to-top {
             position: fixed;
@@ -531,76 +480,61 @@
             visibility: hidden;
             transition: all 0.3s;
         }
-
         .back-to-top.show {
             opacity: 1;
             visibility: visible;
         }
-
         /* Адаптивные улучшения */
         @media (max-width: 1024px) {
             .product-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
-
         @media (max-width: 768px) {
             .nav-container { 
                 padding: 15px; 
                 flex-direction: column;
                 align-items: flex-start;
             }
-            
             .logo img { 
                 height: 60px; 
             }
-            
             .hero {
                 height: auto;
                 min-height: 300px;
                 padding: 40px 20px;
             }
-            
             .hero-content h1 { 
                 font-size: 2.5em; 
             }
-            
             .product-img {
                 height: 200px;
                 aspect-ratio: 1/1;
             }
-            
             .welcome-section {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
             .welcome-image {
                aspect-ratio: 16/9; 
             }
-            
             .product-blog { 
                 padding: 40px 20px; 
             }
-            
             .news-section { 
                 padding: 30px 20px; 
             }
-            
             .contacts-section { 
                 padding: 30px 20px; 
             }
-            
             footer { 
                 padding: 30px; 
             }
         }
-
         @media (max-width: 480px) {
             .hero-content h1 { 
                 font-size: 2em; 
             }
-            
             .button {
                 padding: 10px 20px;
                 font-size: 0.9em;
@@ -615,7 +549,6 @@
         <span></span>
         <span></span>
     </div>
-
     <!-- Шапка -->
     <nav class="navbar">
         <div class="nav-container">
@@ -634,10 +567,8 @@
             </ul>
         </div>
     </nav>
-
     <!-- Стрелка наверх -->
     <a href="#" class="back-to-top" title="Наверх">&#8593;</a>
-
     <!-- Герой-секция -->
     <section class="hero">
         <div class="hero-content">
@@ -651,7 +582,6 @@
             </svg>
         </div>
     </section>
-
     <!-- Приветствие мастера -->
     <section id="about" class="welcome-section">
         <a href="about.html" class="welcome-image">
@@ -665,7 +595,6 @@
             <p>Загляните в каталог — возможно, ваша будущая любимая работа уже ждет вас. А если мечтаете о чем-то особенном, напишите мне. Вместе мы создадим историю, которая станет вашей.</p>
         </div>
     </section>
-
     <!-- Слайдер акций -->
     <section id="promotions" class="promo-slider">
         <div class="promo-slide active" style="background-image: url('Photo/promo1.jpg')">
@@ -685,7 +614,6 @@
             <div class="promo-dot" data-slide="1"></div>
         </div>
     </section>
-
     <!-- Блог видов товаров -->
     <section id="products" class="product-blog">
         <div class="product-grid">
@@ -725,13 +653,16 @@
                 </div>
             </a>
         </div>
+        <!-- Новая кнопка -->
+        <div class="view-all-container">
+            <a href="galery.html" class="view-all-button">Посмотреть все работы</a>
+        </div>
     </section>
-
     <!-- Новости -->
     <section id="news" class="news-section">
         <div class="news-header">
             <h2 style="font-family: 'Playfair Display', serif; color: var(--primary);">Последние события</h2>
-          <p>Здесь вы можете узнать о самых свежих новостях мастерской</p>
+            <p>Здесь вы можете узнать о самых свежих новостях мастерской</p>
         </div>
         <div class="news-slider">
             <div class="news-slide active">
@@ -739,7 +670,7 @@
                 <div class="news-content">
                     <h3>Мастер-класс по прядению</h3>
                     <p>Приглашаю на бесплатный мастер-класс по прядению из шерсти. Узнайте секреты работы на прялке!</p>
-		    <p>Камышинский историко-краеведческий музей. 15 мая 2025г. 12:00</p>
+                    <p>Камышинский историко-краеведческий музей. 15 мая 2025г. 12:00</p>
                 </div>
             </div>
             <div class="news-slide">
@@ -754,9 +685,8 @@
                 <div class="news-dot" data-slide="1"></div>
             </div>
         </div>
-        <a href="all-news.html" class="button">Все новости</a>
+       
     </section>
-
     <!-- Контакты -->
     <section id="contacts" class="contacts-section">
         <h2 style="font-family: 'Playfair Display', serif; color: var(--primary);">Свяжитесь со мной</h2>
@@ -769,30 +699,25 @@
             <a href="https://vk.com/id162091690">VKontakte</a>
         </div>
     </section>
-
     <!-- Футер -->
     <footer>
         <p>© 2025 Елена Лютая HandMade</p>
     </footer>
-
     <script>
         // Мобильное меню
         document.getElementById('mobileMenu').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
-
         // Закрытие меню при клике на ссылку
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.querySelector('.nav-links').classList.remove('active');
             });
         });
-
         // Липкая шапка
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             navbar.classList.toggle('scrolled', window.pageYOffset > 0);
-            
             // Показ стрелки наверх
             const backToTop = document.querySelector('.back-to-top');
             if (window.pageYOffset > 300) {
@@ -801,7 +726,6 @@
                 backToTop.classList.remove('show');
             }
         });
-
         // Плавная прокрутка
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -813,12 +737,10 @@
                 });
             });
         });
-
         // Слайдер акций
         let currentPromo = 0;
         const promoSlides = document.querySelectorAll('.promo-slide');
         const promoDots = document.querySelectorAll('.promo-dot');
-
         function showPromoSlide(index) {
             promoSlides.forEach((slide, i) => {
                 slide.classList.toggle('active', i === index);
@@ -827,24 +749,20 @@
                 dot.classList.toggle('active', i === index);
             });
         }
-
         promoDots.forEach(dot => {
             dot.addEventListener('click', () => {
                 currentPromo = parseInt(dot.dataset.slide);
                 showPromoSlide(currentPromo);
             });
         });
-
         setInterval(() => {
             currentPromo = (currentPromo + 1) % promoSlides.length;
             showPromoSlide(currentPromo);
         }, 5000);
-
         // Слайдер новостей
         let currentNews = 0;
         const newsSlides = document.querySelectorAll('.news-slide');
         const newsDots = document.querySelectorAll('.news-dot');
-
         function showNewsSlide(index) {
             newsSlides.forEach((slide, i) => {
                 slide.classList.toggle('active', i === index);
@@ -853,19 +771,16 @@
                 dot.classList.toggle('active', i === index);
             });
         }
-
         newsDots.forEach(dot => {
             dot.addEventListener('click', () => {
                 currentNews = parseInt(dot.dataset.slide);
                 showNewsSlide(currentNews);
             });
         });
-
         setInterval(() => {
             currentNews = (currentNews + 1) % newsSlides.length;
             showNewsSlide(currentNews);
         }, 5000);
-
         // Обработчик клика на логотип
         document.querySelector('.logo-link').addEventListener('click', (e) => {
             e.preventDefault();
@@ -874,7 +789,6 @@
                 behavior: 'smooth'
             });
         });
-
         // Обработчик клика для стрелки наверх
         document.querySelector('.back-to-top').addEventListener('click', (e) => {
             e.preventDefault();

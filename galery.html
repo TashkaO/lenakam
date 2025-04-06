@@ -347,6 +347,33 @@
             max-height: 100%;
             object-fit: contain;
         }
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: background 0.3s;
+    z-index: 2;
+}
+
+.slider-arrow.prev {
+    left: 10px;
+}
+
+.slider-arrow.next {
+    right: 10px;
+}
+
+.slider-arrow:hover {
+    background: rgba(0,0,0,0.8);
+}
+
         .modal-slider-dots {
             position: absolute;
             bottom: 20px;
@@ -526,9 +553,11 @@
         <div class="modal-content">
             <span class="modal-close">&times;</span>
             <div class="modal-images">
+<button class="slider-arrow prev">&#10094;</button>
                 <div class="modal-slider-container">
                     <div class="modal-slider-track" id="modalImages"></div>
                 </div>
+<button class="slider-arrow next">&#10095;</button>
                 <div class="modal-slider-dots" id="modalSliderDots"></div>
             </div>
             <div class="modal-info">
@@ -700,6 +729,18 @@
                 slide.appendChild(img);
                 modalImages.appendChild(slide);
             });
+// Добавляем обработчики для стрелок
+    document.querySelector('.slider-arrow.prev').addEventListener('click', () => {
+        currentModalImage = (currentModalImage - 1 + product.images.length) % product.images.length;
+        updateSlider();
+        startSliderAuto();
+    });
+    
+    document.querySelector('.slider-arrow.next').addEventListener('click', () => {
+        currentModalImage = (currentModalImage + 1) % product.images.length;
+        updateSlider();
+        startSliderAuto();
+    });
             const dotsContainer = document.getElementById('modalSliderDots');
             dotsContainer.innerHTML = '';
             product.images.forEach((_, index) => {
